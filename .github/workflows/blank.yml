@@ -9,7 +9,6 @@ on:
     branches: [ "Aula_2" ]
   pull_request:
     branches: [ "Aula_2" ]
-
  
 jobs:
   # This workflow contains a nsingle job called "build"
