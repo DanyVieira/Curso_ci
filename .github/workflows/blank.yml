@@ -1,31 +1,31 @@
-# This is a basic workflow to help you get started with Actions
+name: Go
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ Aula_1 ]
+    branches: [ Aula_3 ]
   pull_request:
-    branches: [ Aula_1 ]
- 
+    branches: [ Aula_3 ]
+
 jobs:
-    test:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.18
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
 
-      - name: Build-DB
-        run: docker-compose build
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
 
-      - name: Create-DB
-        run: docker-compose up -d
+    - name: Build
+      run: go build -v main.go
 
-      - name: Test
-        run: go test -v main_test.go
+    - name: Build-DB
+      run: docker-compose build
+
+    - name: Create-DB
+      run: docker-compose up -d
+
+    - name: Test
+      run: go test -v main_test.go
